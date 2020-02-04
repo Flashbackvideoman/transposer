@@ -14,15 +14,22 @@ $operation = $_REQUEST['operation'];
     }
     
     // name of the directory where the files should be stored
-    $targetdir = '';   
-    $targetfile = './' . $targetdir.$_FILES['file']['name'];
-    ChromePhp::log("Filename: " . $targetfile);
+    $targetfile = $targetdir.$_FILES['file']['tmp_name'];   
+    $srcfile = $targetdir.$_FILES['file']['name'];
+    //ChromePhp::log("Tmp Name: " . $targetfile);
+    //ChromePhp::log("Source Name: " . $srcfile);
+    $result = move_uploaded_file($srcfile, $targetfile);
+    //ChromePhp::log("Result: " . ($result) ? 'true' : 'false');
     $filetext = file_get_contents($targetfile);
     echo '<pre>' . str_replace(["\r\n","\r","\n"], "<br />", $filetext) . '</pre>';
   } else 
     if( $operation === 'transpose' ) {  
       $filetext = $_REQUEST['text'];
-      $test = new Transposer($filetext, $offset);  
+     ChromePhp::log("offset: " .  $offset);
+    //ChromePhp::log("Source Name: " . $srcfile);
+     $newText = new Transposer($filetext, $offset);  
+     // ChromePhp::log("offset: " .  $newText);
+     echo '<pre>' . str_replace(["\r\n","\r","\n"], "<br />", $newText) . '</pre>';
   } else 
     if( $operation === 'save') {
       $filename = $_REQUEST['filename'];

@@ -67,9 +67,9 @@ class Transposer
 			$note = "/\|".$note."\|/";
 		}
 		$this->song = preg_replace($this->formattedChords, $this->replacementChords, $this->song);
-		 $html= preg_replace($this->search2,'<b>$1</b>',$this->song);
-		 $old = array("<pre>", "\r", "\n", "</pre>");
-		  $new = array("<pre><span>", "", "</span>\n<span>", "</span></pre>");
+		$html= preg_replace($this->search2,'<b>$1</b>',$this->song);
+		$old = array("<pre>", "\r", "\n", "</pre>");
+		$new = array("<pre><span>", "", "</span>\n<span>", "</span></pre>");
 
 
 		 //$html = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><html><body><pre>'.$html.'</pre></body></html>';
@@ -79,6 +79,7 @@ $html = str_replace($old, $new, $html);
 //return $this->song;
 //echo str_replace("\r\n", "<br />", $html);
 echo preg_replace("/\r\n|\r|\n/", '<br />', $html);
+
 
 //echo $html = str_replace("<span></span>","<span> </span>",$html);
   //ChromePhp::log($html);

@@ -5,7 +5,7 @@
 /* eslint-disable no-control-regex */
 
 
-var offset = 0;
+var keyOffset = 0;
 var fileText = "";
 var fileName = "";
 var fileData = null;
@@ -20,7 +20,7 @@ function loadup(op) {
     fileData = op;
   }
 
-  offset = 0;
+  keyOffset = 0;
   $('#downloadfile').empty();
 
   uploadMusicFile(fileData, function(data) {
@@ -99,52 +99,28 @@ function getFile(filename, offset, cb) {
 
 
 function plus() {
-  offset++;
-  if(offset > 11) {
-    offset = 11;
+  keyOffset++;
+  if(keyOffset > 11) {
+    keyOffset = 0;
   }
-  $("#offset").val(offset);
+  $("#offset").val(keyOffset);
   retranspose();
 }
 
 function minus() {
-  offset--;
-  if(offset < -11) {
-    offset = -11;
+  keyOffset--;
+  if(keyOffset < -11) {
+    keyOffset = 0;
   }
-  $("#offset").val(offset);
+  $("#offset").val(keyOffset);
   retranspose();
 }
 
 function retranspose() {
   //debugger;
-  transposeFile(fileText, offset, function(data) {
+  transposeFile(fileText, keyOffset, function(data) {
     displayMusicArray(data);    
   });
-}
-
-function transposeFile(ftext, offset, cb) {  
-    let operation = "transpose";
-    let t = ftext.replace(new RegExp('<br />', 'g'), '\n');
-    t = t.replace(/<[^>]*>?/gm, '');
-    $.ajax({
-      url: 'transpose.php',
-      type: 'POST',
-      dataType: "text/plain",
-      data: {
-          text: t, offset: offset, operation: operation
-      },
-      success: function(data) {
-        if (cb) {
-          cb.call(this, data.replace('\n', '<br />'));
-        }
-      },
-      error: function(jqXHR) {
-         if (cb) {
-          cb(jqXHR.responseText);
-        }
-      }
-    });
 }
 
 function saveFile() {
@@ -188,7 +164,7 @@ function dragLeaveHandler(ev) {
 }
 
 function clearText() {
-  var offset = 0;
+  var keyOffset = 0;
   var fileText = "";
   var fileName = "";
   var fileData = null;
@@ -203,7 +179,7 @@ function clearText() {
 function handlepaste(ev) {
   ev.preventDefault();
   let t = ev.clipboardData.getData('text');
-  offset = 0;
+  keyOffset = 0;
   var rx = new RegExp(/(\r\n)+/, 'gm');
   fileText = '<pre>' + t.replace(rx, "<br />") + '</pre>';
   fileName = "";
@@ -243,6 +219,34 @@ function uploadMusicFile(file_data, cb) {
           */
         }
      });
+}
+
+function transposeFile(ftext, offset, cb) {  
+    let t = ftext.replace(new RegExp('<br />', 'g'), '\n');
+    t = t.replace(/<[^>]*>?/gm, '');
+    var form_data = new FormData(); 
+    form_data.append('text', t);                          
+    form_data.append('operation', 'transpose');                          
+    form_data.append('offset', offset);        
+    $.ajax({
+      url: 'transpose.php',
+      type: 'POST',
+      dataType: 'text',  // what to expect back from the PHP script, if anything
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      success: function(data) {
+        if (cb) {
+          cb(data.replace('\n', '<br />'));
+        }
+      },
+      error: function(jqXHR) {
+         if (cb) {
+          cb(jqXHR.responseText);
+        }
+      }
+    });
 }
 
 
