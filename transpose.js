@@ -63,6 +63,7 @@ function selectText() {
 
 // [re]display the file
 function displayMusicArray(m) {
+  $('#plusminusbuttons').show();
   $('#outfile').show();
   $('#copytext').show();
   $('#cleartext').show();
@@ -97,6 +98,14 @@ function getFile(filename, offset, cb) {
     });
 }
 
+function helpText() {
+  loadHelpFile(function(data) {
+    var w = window.open('', '_blank', "toolbar=no,scrollbars=yes,resizable=yes"); 
+    w.document.title = "Transposer Help"
+    $(w.document.body).html(data);
+    $("#infile").focus();
+  });
+}
 
 function plus() {
   keyOffset++;
@@ -168,11 +177,12 @@ function clearText() {
   var fileText = "";
   var fileName = "";
   var fileData = null;
+  $('#plusminusbuttons').hide();
   $('#outfile').hide();
   $('#copytext').hide();
   $('#cleartext').hide();
   $('#savefile').empty();
-  $('#filetext').empty();
+  $('#filetext').empty().text("Paste song text here");
   $('#infile').val('');
 }
 
@@ -184,6 +194,32 @@ function handlepaste(ev) {
   fileText = '<pre>' + t.replace(rx, "<br />") + '</pre>';
   fileName = "";
   displayMusicArray(fileText);
+}
+
+// Get help file
+
+function loadHelpFile(cb) {
+    var form_data = new FormData();                  
+    form_data.append('operation', 'help');                          
+    $.ajax({
+        url: 'transpose.php', // point to server-side PHP script 
+        dataType: 'text',  // what to expect back from the PHP script, if anything
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         
+        type: 'post',
+        success: function(data){
+          if( cb ) {
+            cb(data);
+          }
+        },
+       error: function(jqXHR) {
+         if (cb) {
+          cb(jqXHR.responseText);
+        }
+      }
+     });
 }
 
 // Upload a new music file to server and return the file data
@@ -205,19 +241,12 @@ function uploadMusicFile(file_data, cb) {
           if( cb ) {
             cb(data);
           }
-          /*
-          fileText = data;
-          var c;
-          for(var i = 0; i < fileText.length; i++) {
-            if((c = fileText.charCodeAt(i)) > 128) {
-                if( c === 65533) {
-                  setCharAt(fileText,i,"'");
-                }
-            }
-          }
-          $("#filetext").html(fileText);
-          */
+        },
+      error: function(jqXHR) {
+         if (cb) {
+          cb(jqXHR.responseText);
         }
+      }
      });
 }
 

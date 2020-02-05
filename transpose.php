@@ -3,7 +3,6 @@
 include "ChromePhp.php";
 include "php_chord_transposer.php";
 
-$offset = $_REQUEST['offset'];
 $operation = $_REQUEST['operation'];
 
   if( $operation === 'load') {
@@ -12,19 +11,18 @@ $operation = $_REQUEST['operation'];
         echo "<p>Unable to open remote file.\n";
         exit;
     }
-    
+    $offset = $_REQUEST['offset'];;
     // name of the directory where the files should be stored
     $targetfile = $targetdir.$_FILES['file']['tmp_name'];   
     $srcfile = $targetdir.$_FILES['file']['name'];
-    //ChromePhp::log("Tmp Name: " . $targetfile);
-    //ChromePhp::log("Source Name: " . $srcfile);
     $result = move_uploaded_file($srcfile, $targetfile);
     //ChromePhp::log("Result: " . ($result) ? 'true' : 'false');
     $filetext = file_get_contents($targetfile);
     echo '<pre>' . str_replace(["\r\n","\r","\n"], "<br />", $filetext) . '</pre>';
   } else 
     if( $operation === 'transpose' ) {  
-      $filetext = $_REQUEST['text'];
+    $offset = $_REQUEST['offset'];
+     $filetext = $_REQUEST['text'];
      ChromePhp::log("offset: " .  $offset);
     //ChromePhp::log("Source Name: " . $srcfile);
      $newText = new Transposer($filetext, $offset);  
@@ -39,6 +37,11 @@ $operation = $_REQUEST['operation'];
       fwrite($myfile, $filetext);
       fclose($myfile);
       echo '<pre>' . str_replace(["\r\n","\r","\n"], "<br />", $filetext) . '</pre>';
-}
+    } else
+      if( $operation === 'help') {
+        $help = file_get_contents('transpose_help.html');
+        ChromePhp::log("help: " .  $help);
+        echo $help;
+      }
 
 ?>
