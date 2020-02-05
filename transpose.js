@@ -1,9 +1,12 @@
+/* transpose.js
+  Copyright (c) 2020, Norman N. Strassner
+*/
 /* jshint esversion: 6 */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable no-debugger */
 /* eslint-disable no-control-regex */
-
+'use strict';
 
 var keyOffset = 0;
 var fileText = "";

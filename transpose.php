@@ -1,4 +1,7 @@
 <?php
+/* transpose.php
+  Copyright (c) 2020, Norman N. Strassner
+*/
 
 include "ChromePhp.php";
 include "php_chord_transposer.php";
