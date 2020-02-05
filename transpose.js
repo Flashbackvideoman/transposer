@@ -9,7 +9,7 @@ var keyOffset = 0;
 var fileText = "";
 var fileName = "";
 var fileData = null;
-const saveToFile = 'transposed.tmp';
+const saveToFile = 'transposed.txt';
 
 // Load the file
 function loadup(op) {
