@@ -19,8 +19,6 @@
 
 <body style="background-color: #eee;">
 
-  <section>
-
     <div class="row">
       
       <div class="col col1">
@@ -34,8 +32,8 @@
           <label class="filebtn" for="infile">Source File: <input type="file" class="filebtn" id="infile" onchange="loadup(null)"></label>
           <div style="margin-top: 10px;">
             <span id="plusminusbuttons">
-              <input class="btn-small" type="button" class="plusminus" value="+" id="plus" onclick="plus()">
-              <input class="btn-small" type="button" class="plusminus" value="-" id="minus" onclick="minus()">
+              <input class="btn-small plusminus" type="button" value="+" id="plus" onclick="plus()">
+              <input class="btn-small plusminus" type="button" value="-" id="minus" onclick="minus()">
               <input type="text" readonly id="offset" value="0" style="width: 2em;text-align:center">
             </span>
           </div>
@@ -45,12 +43,12 @@
           <div style="margin-top:10px;">
             <button class="btn-small" id="cleartext" onclick="clearText()">Clear</button>
             <button class="btn-small" id="present" onclick="presentText()">Present</button>
-          </span>
-          <div id="downloadfile"></div>
+            
+            <div id="downloadfile"></div>
 
-          <div id="dropzone" style="width: 50%; height: 100px;border: 1px solid #000;margin-top:30px;text-align:center;vertical-align:middle;background-color: #fff;" ondragover="dragOverHandler(event)" ondrop="dropHandler(event)" ondragenter="dragEnterHandler(event)" ondragleave="dragLeaveHandler(event)" >Drop text file here
+            <div id="dropzone" style="width: 50%; height: 100px;border: 1px solid #000;margin-top:30px;text-align:center;vertical-align:middle;background-color: #fff;" ondragover="dragOverHandler(event)" ondrop="dropHandler(event)" ondragenter="dragEnterHandler(event)" ondragleave="dragLeaveHandler(event)" >Drop text file here
+            </div>          
           </div>
-          
         </div>
       </div><!-- col1 -->
       
@@ -63,50 +61,13 @@
     </div><!-- row -->
 
     <div class="row footer" style="width: 100%;">
-        <div>
-            Copyright (c)2020, Norman H. Strassner.  All rights reserved
-        </div>
+        <div>Copyright (c)2020, Norman H. Strassner.  All rights reserved</div>
     </div>
 
   
     <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="transpose.js"></script>
     <script type="text/javascript" src="js/materialize/js/materialize.min.js"></script>
-
-  <script type="text/javascript">
-    $(document).ready(function(){
-        $('#filetext').css('height', $(window).height() - 100);
-        // Comma, not colon ----^
-    });
-    $(window).resize(function(){
-        $('#filetext').css('height', $(window).height() - 100);
-        // Comma, not colon ----^
-    });
-
-    $('#plusminusbuttons').hide();
-    $('#outfile').hide();
-    $('#copytext').hide();
-    $('#cleartext').hide();
-    $('#present').hide();
-    
-    $(window).on("drop", function(ev) {
-      ev.preventDefault();
-      ev.stopImmediatePropagation();
-    });
-    $(window).on("dragover", function(ev) {
-      ev.preventDefault();
-      ev.stopImmediatePropagation();
-    });
-    
-    $("#dropzone").on("dragenter", function(ev) {
-      ev.preventDefault();
-      $("#dropzone").css("background-color", "#cccccc");
-    });
-    $("#dropzone").on("dragleave", function(ev) {
-      ev.preventDefault();
-      $("#dropzone").css("background-color", "#ffffff");
-    });
-</script>  
+    <script type="text/javascript" src="transpose.js"></script>
 
 </body>
 </html>

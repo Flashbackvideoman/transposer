@@ -16,6 +16,51 @@ var transposedText = "";
 var fileData = null;
 const saveToFile = 'transposed.txt';
 
+    $(document).ready(function(){
+        $('#filetext').css('height', $(window).height() - 100);
+        // Comma, not colon ----^
+    });
+    $(window).resize(function(){
+        $('#filetext').css('height', $(window).height() - 100);
+        // Comma, not colon ----^
+    });
+
+    $('#plusminusbuttons').hide();
+    $('#outfile').hide();
+    $('#copytext').hide();
+    $('#cleartext').hide();
+    $('#present').hide();
+    
+    $(window).on("drop", function(ev) {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+    });
+    $(window).on("dragover", function(ev) {
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+    });
+    
+    $("#dropzone").on("dragenter", function(ev) {
+      ev.preventDefault();
+      $("#dropzone").css("background-color", "#cccccc");
+    });
+    $("#dropzone").on("dragleave", function(ev) {
+      ev.preventDefault();
+      $("#dropzone").css("background-color", "#ffffff");
+    });
+
+    $(window).on("keypress", function(ev) {
+      ev.preventDefault();
+      switch( ev.key ) {
+          case '+':
+          plus();
+          break;
+        case '-':
+          minus();
+          break;
+      }
+    });
+
 // Load the file
 function loadup(op) {
   if( op === null) {
