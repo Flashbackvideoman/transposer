@@ -27,11 +27,8 @@ $operation = $_REQUEST['operation'];
     if( $operation === 'transpose' ) {  
       $offset = $_REQUEST['offset'];
       $filetext = $_REQUEST['text'];
-      //ChromePhp::log("offset: " .  $offset);
-    //ChromePhp::log("Source Name: " . $srcfile);
       $newText = new Transposer($filetext, $offset);  
      // ChromePhp::log("offset: " .  $newText);
-      //echo '<pre>' . str_replace(["\r\n","\r","\n"], "<br />", $newText) . '</pre>';
   } else 
     if( $operation === 'save') {
       $filename = $_REQUEST['filename'];

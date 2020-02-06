@@ -70,25 +70,10 @@ class Transposer
 		$html= preg_replace($this->search2,'<b>$1</b>',$this->song);
 		$old = array("<pre>", "\r", "\n", "</pre>");
 		$new = array("<pre><span>", "", "</span>\n<span>", "</span></pre>");
-
-
-		 //$html = '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><html><body><pre>'.$html.'</pre></body></html>';
-		 $html = '<pre>'.$html.'</pre>';
-
-$html = str_replace($old, $new, $html);
-//return $this->song;
-//echo str_replace("\r\n", "<br />", $html);
-echo preg_replace("/\r\n|\r|\n/", '<br />', $html);
-
-
-//echo $html = str_replace("<span></span>","<span> </span>",$html);
-  //ChromePhp::log($html);
-//$dompdf = new DOMPDF();
-//$dompdf->load_html($html);
-//$dompdf->render();
-//strlen($html);
-//$dompdf->stream("sample.pdf");
-	}
+    $html = '<pre>'.$html.'</pre>';
+    $html = str_replace($old, $new, $html);
+    echo preg_replace("/\r\n|\r|\n/", '<br />', $html);
+}
    
 	public function transpose($note,$types,$steps){
 		
@@ -108,10 +93,7 @@ echo preg_replace("/\r\n|\r|\n/", '<br />', $html);
 				throw new Exception("My math skills suck! $note : $steps : $ix : $ixNew");
 		}
 		array_push($this->replacementChords,$this->notes[$types][$ixNew]);
-		//echo "/|".$note."|/";	
 	}
 }
-    //$new_song = preg_replace($u, $new, $song);
-	  //echo $clean = str_replace('|', '', $new_song);		
 
 ?>
