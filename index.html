@@ -26,41 +26,44 @@
       <div class="col col1">
         <div style="float:left; display:block; margin-top:30px; margin-left:40px">
           
-          <div id="title" style="font-size: 28px;font-weight:bold;text-align:center;">
-            Song Transposer by Norm Strassner
+          <div id="title" style="font-size: 28px;font-weight:bold;text-align:left;">
+            <img width="50" src="norm-currie-small.jpg" alt="Norm characture by Gordon Currie"/>
+            <span style="vertical-align: top">Song Transposer</span>
           </div>
           
-          <label for="infile">Source File: <input type="file" id="infile" onchange="loadup(null)"></label>
+          <label class="filebtn" for="infile">Source File: <input type="file" class="filebtn" id="infile" onchange="loadup(null)"></label>
           <div style="margin-top: 10px;">
             <span id="plusminusbuttons">
-              <input type="button" class="plusminus" value="+" id="plus" onclick="plus()">
-              <input type="button" class="plusminus" value="-" id="minus" onclick="minus()">
-              <!-- <input type="number" id="offset" min="-12" max="12" value="0" style="width: 50px" onchange="retranspose()"> -->
-              <input type="text" id="offset" value="0" style="width: 2em;text-align:center">
+              <input class="btn-small" type="button" class="plusminus" value="+" id="plus" onclick="plus()">
+              <input class="btn-small" type="button" class="plusminus" value="-" id="minus" onclick="minus()">
+              <input type="text" readonly id="offset" value="0" style="width: 2em;text-align:center">
             </span>
           </div>
-          <button id="helptext" onclick="helpText()">Help</button>
-          <button id="outfile" onclick="saveFile()">Save</button>
-          <button id="copytext" onclick="selectText()">Copy to Clipboard</button>
-          <button id="cleartext" onclick="clearText()">Clear</button>
+          <button class="btn-small" id="helptext" onclick="helpText()">Help</button>
+          <button class="btn-small" id="outfile" onclick="saveFile()">Save</button>
+          <button class="btn-small" id="copytext" onclick="selectText()">Copy to Clipboard</button>
+          <div style="margin-top:10px;">
+            <button class="btn-small" id="cleartext" onclick="clearText()">Clear</button>
+            <button class="btn-small" id="present" onclick="presentText()">Present</button>
+          </span>
           <div id="downloadfile"></div>
 
-          <div id="dropzone" style="width: 90%; height: 200px;border: 1px solid #000;margin-top:30px;text-align:center;vertical-align:middle;background-color: #fff;" ondragover="dragOverHandler(event)" ondrop="dropHandler(event)" ondragenter="dragEnterHandler(event)" ondragleave="dragLeaveHandler(event)" >Drop text file here
+          <div id="dropzone" style="width: 50%; height: 100px;border: 1px solid #000;margin-top:30px;text-align:center;vertical-align:middle;background-color: #fff;" ondragover="dragOverHandler(event)" ondrop="dropHandler(event)" ondragenter="dragEnterHandler(event)" ondragleave="dragLeaveHandler(event)" >Drop text file here
           </div>
- 
+          
         </div>
       </div><!-- col1 -->
       
       <div class="col">
         <div style="margin-top: 40px;">
-          <div contenteditable="true" spellcheck="false" style="border: 1px solid #000;margin-left: 30px;min-height: 100px;min-width:550px;height: auto; width: auto;padding: 10px;background-color: #fff;" id="filetext" onpaste="handlepaste(event)">Paste song text here</div>
+          <div contenteditable="true" spellcheck="false" style="border: 1px solid #000;margin-left: 30px;min-height: 100px;min-width:550px;width: auto;padding: 10px;background-color: #fff; overflow-y:scroll" id="filetext" onpaste="handlepaste(event)">Paste song text here</div>
         </div>
       </div>  
       
     </div><!-- row -->
 
-    <div class="row" style="width: 100%;">
-        <div id="footer">
+    <div class="row footer" style="width: 100%;">
+        <div>
             Copyright (c)2020, Norman H. Strassner.  All rights reserved
         </div>
     </div>
@@ -71,10 +74,20 @@
     <script type="text/javascript" src="js/materialize/js/materialize.min.js"></script>
 
   <script type="text/javascript">
+    $(document).ready(function(){
+        $('#filetext').css('height', $(window).height() - 100);
+        // Comma, not colon ----^
+    });
+    $(window).resize(function(){
+        $('#filetext').css('height', $(window).height() - 100);
+        // Comma, not colon ----^
+    });
+
     $('#plusminusbuttons').hide();
     $('#outfile').hide();
     $('#copytext').hide();
     $('#cleartext').hide();
+    $('#present').hide();
     
     $(window).on("drop", function(ev) {
       ev.preventDefault();

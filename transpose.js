@@ -11,6 +11,8 @@
 var keyOffset = 0;
 var fileText = "";
 var fileName = "";
+var rawText = "";
+var transposedText = "";
 var fileData = null;
 const saveToFile = 'transposed.txt';
 
@@ -70,6 +72,7 @@ function displayMusicArray(m) {
   $('#outfile').show();
   $('#copytext').show();
   $('#cleartext').show();
+  $('#present').show();
   $('#savefile').empty();
   $('#filetext').empty().html(m);
 }
@@ -102,12 +105,21 @@ function getFile(filename, offset, cb) {
 }
 
 function helpText() {
-  loadHelpFile(function(data) {
+  loadHTMLFile("help", function(data) {
     var w = window.open('', '_blank', "toolbar=no,scrollbars=yes,resizable=yes"); 
     w.document.title = "Transposer Help"
     $(w.document.body).html(data);
     $("#infile").focus();
   });
+}
+
+function presentText() {
+   loadHTMLFile("present", function(data) {
+   var w = window.open('', '_blank', "toolbar=no,scrollbars=yes,resizable=yes"); 
+     w.document.write(data);
+     w.document.title = "Transposed Chart"
+    $(w.document.body).find("#musicchart").html($('#filetext').html());
+   });
 }
 
 function plus() {
@@ -137,12 +149,12 @@ function retranspose() {
 
 function saveFile() {
     let operation = "save";
-    let rawText = $('#filetext').html();
-    let t = rawText.replace(new RegExp('<br />', 'g'), '\n');
-    t = rawText.replace(new RegExp('<br>', 'g'), '\n');
-    t = t.replace(/<[^>]*>?/gm, '');
+    let h = $('#filetext').html();
+    rawText = h.replace(new RegExp('<br />', 'g'), '\n');
+    rawText = h.replace(new RegExp('<br>', 'g'), '\n');
+    rawText = rawText.replace(/<[^>]*>?/gm, '');
   
-    $.post( 'transpose.php',  {filename: saveToFile, text: t, operation: operation}  );
+    $.post( 'transpose.php',  {filename: saveToFile, text: rawText, operation: operation}  );
 
     $('#downloadfile').empty();  
     let a = $('<a href="' + saveToFile + '" download="' + fileName + '" id="savefile">Download File</a>').appendTo('#downloadfile');
@@ -184,6 +196,7 @@ function clearText() {
   $('#outfile').hide();
   $('#copytext').hide();
   $('#cleartext').hide();
+  $('#present').hide();
   $('#savefile').empty();
   $('#filetext').empty().text("Paste song text here");
   $('#infile').val('');
@@ -201,9 +214,9 @@ function handlepaste(ev) {
 
 // Get help file
 
-function loadHelpFile(cb) {
+function loadHTMLFile(type, cb) {
     var form_data = new FormData();                  
-    form_data.append('operation', 'help');                          
+    form_data.append('operation', type);                          
     $.ajax({
         url: 'transpose.php', // point to server-side PHP script 
         dataType: 'text',  // what to expect back from the PHP script, if anything

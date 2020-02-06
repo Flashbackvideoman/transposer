@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript" src="js/jquery/jquery-3.4.1.min.js"></script>
+<!-- <script type="text/javascript" src="js/transpose_present.js"></script> -->
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<script>
+  function fontLarger() {
+    let fsize = parseInt($('#musicchart').css("font-size"), 10);
+    fsize += 2;
+    if( fsize <= 32 ) {
+      $('#musicchart').css("font-size", fsize + 'px');
+    }
+  }
+  function fontSmaller() {
+    let fsize = parseInt($('#musicchart').css("font-size"), 10);
+    fsize -= 2;
+    if( fsize >= 10 ) {
+      $('#musicchart').css("font-size", fsize + 'px');
+    }    
+  }  
+</script>
+  
+<title>Transposed Chart</title>
+  <style>
+    #musicchart {
+      font-size: 18px;
+    }
+    body {
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <button onclick="window.close()" style="height:30px;width:auto;padding: 5px;">Close This Window</button>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <button id="fontlarger" onclick="fontLarger()">Larger</button>
+  <button id="fontsmaller" onclick="fontSmaller()">Smaller</button>
+  <div id="musicchart" style="padding:15px;">
+  </div>
+  
+</body>
+</html>

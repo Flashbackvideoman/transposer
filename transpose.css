@@ -3,15 +3,22 @@
   Copyright (c) 2020, Norman N. Strassner
 */
 
-#footer {
-   position:absolute;
-   bottom:0;
+.footer {
+   position:fixed;
+   bottom:-20px;
    width:100%;
    height:40px; 
-  background-color: #ccc;
-  padding: 10px 0 0 10px;
+   background-color: #ccc;
+}
+
+.footer div {
+   padding: 10px 0 0 10px;
 }
 
 .plusminus {
   width: 50px;
+}
+
+.filebtn {
+  font-size: 16px;
 }
