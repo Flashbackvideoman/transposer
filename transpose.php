@@ -38,16 +38,36 @@ $operation = $_REQUEST['operation'];
       fwrite($myfile, $filetext);
       fclose($myfile);
       echo '<pre>' . str_replace(["\r\n","\r","\n"], "<br />", $filetext) . '</pre>';
-    } else
-      if( $operation === 'help') {
-        $help = file_get_contents('transpose_help.html');
-        //ChromePhp::log("help: " .  $help);
-        echo $help;
-      } else
-      if( $operation === 'present') {
-        $present = file_get_contents('transpose_present.html');
-        //ChromePhp::log("present: " .  present);
-        echo $present;
-      }
+  } else
+     if( $operation === 'help') {
+       $help = file_get_contents('transpose_help.html');
+       //ChromePhp::log("help: " .  $help);
+       echo $help;
+  } else
+     if( $operation === 'present') {
+       $present = file_get_contents('transpose_present.html');
+       //ChromePhp::log("present: " .  present);
+       echo $present;
+  } else
+      if( $operation === 'inccount') {
+        incrementCounter();
+  } else
+      if( $operation === 'getcount') {
+        getCounter();
+  }
+
+function incrementCounter() {
+  $counter = intval(file_get_contents("counter.txt"), 10);
+  $counter++;
+  $myfile = fopen("counter.txt", "w") or die("Unable to open file!");
+  fwrite($myfile, $counter);
+  fclose($myfile);
+  echo $counter;
+}
+
+function getCounter() {
+  $counter = intval(file_get_contents("counter.txt"), 10);
+  echo $counter;
+}
 
 ?>
