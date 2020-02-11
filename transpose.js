@@ -55,15 +55,17 @@ const saveToFile = 'transposed.txt';
     });
 
     $(window).on("keypress", function(ev) {
-      ev.preventDefault();
-      switch( ev.key ) {
-          case '+':
-          plus();
-          break;
-        case '-':
-          minus();
-          break;
+      if( ev.shiftKey && ev.key  === '+' ) {
+        ev.stopPropagation();
+        plus();
+        return false;
       }
+      else if( ev.shiftKey && ev.key === '-') {
+        ev.stopPropagation();
+        minus();
+        return false;
+      } else return true;
+
     });
 
 
@@ -253,7 +255,7 @@ function clearText() {
   $('#cleartext').hide();
   $('#present').hide();
   $('#savefile').empty();
-  $('#filetext').empty().text("Paste song text here");
+  $('#filetext').empty().html("Paste song text here");
   $('#infile').val('');
 }
 
