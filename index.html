@@ -42,23 +42,24 @@
           
           <label class="filebtn" for="infile">Source File: <input type="file" class="filebtn" id="infile" onchange="loadup(null)"></label>
           <div style="margin-top: 10px;">
-            <span id="plusminusbuttons">
+            <span id="plusminusbuttons" class="hidden">
               <input class="btn-small plusminus" type="button" value="+" id="plus" onclick="plus()">
               <input class="btn-small plusminus" type="button" value="-" id="minus" onclick="minus()">
               <input type="text" readonly id="offset" value="0" style="width: 2em;text-align:center">
             </span>
           </div>
           <button class="btn-small" id="helptext" onclick="helpText()">Help</button>
-          <button class="btn-small" id="outfile" onclick="saveFile()">Save</button>
-          <button class="btn-small" id="copytext" onclick="selectText()">Copy to Clipboard</button>
+          <button class="btn-small hidden" id="outfile" onclick="saveFile()">Save</button>
+          <button class="btn-small hidden" id="copytext" onclick="selectText()">Copy to Clipboard</button>
           <div style="margin-top:10px;">
-            <button class="btn-small" id="cleartext" onclick="clearText()">Clear</button>
-            <button class="btn-small" id="present" onclick="presentText()">Present</button>
+            <button class="btn-small hidden" id="cleartext" onclick="clearText()">Clear</button>
+            <button class="btn-small hidden" id="present" onclick="presentText()">Present</button>
             
             <div id="downloadfile"></div>
 
             <div id="dropzone" style="width: 50%; height: 100px;border: 1px solid #000;margin-top:30px;text-align:center;vertical-align:middle;background-color: #fff;" ondragover="dragOverHandler(event)" ondrop="dropHandler(event)" ondragenter="dragEnterHandler(event)" ondragleave="dragLeaveHandler(event)" >Drop text file here
-            </div>          
+            </div>   
+            <div style="margin-top: 20px;"># of charts loaded by visitors: <span id="counter"></span></div>
           </div>
         </div>
       </div><!-- col1 -->

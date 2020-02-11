@@ -17,20 +17,25 @@ var fileData = null;
 const saveToFile = 'transposed.txt';
 
     $(document).ready(function(){
-        $('#filetext').css('height', $(window).height() - 100);
+      $('#filetext').css('height', $(window).height() - 100);
+      getCounter(function(count) {
+        $("#counter").text(count);
+      });
+
         // Comma, not colon ----^
     });
+
     $(window).resize(function(){
         $('#filetext').css('height', $(window).height() - 100);
         // Comma, not colon ----^
     });
 
-    $('#plusminusbuttons').hide();
+    /*$('#plusminusbuttons').hide();
     $('#outfile').hide();
     $('#copytext').hide();
     $('#cleartext').hide();
     $('#present').hide();
-    
+    */
     $(window).on("drop", function(ev) {
       ev.preventDefault();
       ev.stopImmediatePropagation();
@@ -61,6 +66,7 @@ const saveToFile = 'transposed.txt';
       }
     });
 
+
 // Load the file
 function loadup(op) {
   if( op === null) {
@@ -83,9 +89,13 @@ function loadup(op) {
           }
       }
     }
-    displayMusicArray(fileText);    
+    displayMusicArray(fileText); 
+    incrementCounter(function(count) {
+      $("#counter").text(count);
+    });
   });
 }
+
 
 function selectText() {
     var node = document.getElementById("filetext");
@@ -255,6 +265,10 @@ function handlepaste(ev) {
   fileText = '<pre>' + t.replace(rx, "<br />") + '</pre>';
   fileName = "";
   displayMusicArray(fileText);
+  incrementCounter(function(count) {
+    $("#counter").text(count);
+  });
+
 }
 
 // Get help file
@@ -339,6 +353,55 @@ function transposeFile(ftext, offset, cb) {
     });
 }
 
+function incrementCounter(cb) { 
+    var form_data = new FormData(); 
+    form_data.append('operation', 'inccount');
+    $.ajax({
+      url: 'transpose.php',
+      type: 'POST',
+      dataType: 'text',  // what to expect back from the PHP script, if anything
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      success: function(data) {
+        if (cb) {
+          cb(data);
+        }
+      },
+      error: function(jqXHR) {
+         if (cb) {
+          cb(jqXHR.responseText);
+        }
+      }
+    });
+ 
+}
+
+function getCounter(cb) { 
+    var form_data = new FormData(); 
+    form_data.append('operation', 'getcount');
+    $.ajax({
+      url: 'transpose.php',
+      type: 'POST',
+      dataType: 'text',  // what to expect back from the PHP script, if anything
+      cache: false,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      success: function(data) {
+        if (cb) {
+          cb(data);
+        }
+      },
+      error: function(jqXHR) {
+         if (cb) {
+          cb(jqXHR.responseText);
+        }
+      }
+    });
+ 
+}
 
 // Utilities
 function setCharAt(str,index,chr) {
