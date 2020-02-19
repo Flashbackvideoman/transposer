@@ -42,6 +42,7 @@
           
           <label class="filebtn" for="infile">Source File: <input type="file" class="filebtn" id="infile" onchange="loadup(null)"></label>
           <div style="margin-top: 10px;">
+
             <span id="plusminusbuttons" class="hidden">
               <input class="btn-small plusminus" type="button" value="+" id="plus" onclick="plus()">
               <input class="btn-small plusminus" type="button" value="-" id="minus" onclick="minus()">
@@ -55,18 +56,25 @@
             <button class="btn-small hidden" id="cleartext" onclick="clearText()">Clear</button>
             <button class="btn-small hidden" id="present" onclick="presentText()">Present</button>
             
-            <div id="downloadfile"></div>
+            <div title="Download song text file to your computer" id="downloadfile"></div>
 
-            <div id="dropzone" style="width: 50%; height: 100px;border: 1px solid #000;margin-top:30px;text-align:center;vertical-align:middle;background-color: #fff;" ondragover="dragOverHandler(event)" ondrop="dropHandler(event)" ondragenter="dragEnterHandler(event)" ondragleave="dragLeaveHandler(event)" >Drop text file here
-            </div>   
-            <div style="margin-top: 20px;"># of charts loaded by visitors: <span id="counter"></span></div>
+            <div title="Drag and drop a song text file" id="dropzone" style="height: 100px;border: 1px solid #000;margin-top:30px;text-align:center;vertical-align:middle;background-color: #fff;" ondragover="dragOverHandler(event)" ondrop="dropHandler(event)" ondragenter="dragEnterHandler(event)" ondragleave="dragLeaveHandler(event)" >Drop text file here
+            </div>          
+
+         </div>
+
+            <div id="disclaimer" style="height:auto;border:1px solid #000;margin-top:30px;padding:8px">
+            <strong>NOTE:</strong> This site does NOT retain any uploaded information.<br />
+            All user data (music text) is removed after processing,<br />and is only displayed for the current user.
+
           </div>
+
         </div>
       </div><!-- col1 -->
       
       <div class="col">
         <div style="margin-top: 40px;">
-          <div contenteditable="true" spellcheck="false" style="border: 1px solid #000;margin-left: 30px;min-height: 100px;min-width:550px;width: auto;padding: 10px;background-color: #fff; overflow-y:scroll" id="filetext" onpaste="handlepaste(event)">Paste song text here</div>
+          <div contenteditable="true" spellcheck="false" id="filetext" onpaste="handlepaste(event)">Paste song text here</div>
         </div>
       </div>  
       
