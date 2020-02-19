@@ -40,6 +40,7 @@ const saveToFile = 'transposed.txt';
       ev.preventDefault();
       ev.stopImmediatePropagation();
     });
+
     $(window).on("dragover", function(ev) {
       ev.preventDefault();
       ev.stopImmediatePropagation();
