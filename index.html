@@ -42,18 +42,19 @@
           
           <label class="filebtn" for="infile">Source File: <input type="file" class="filebtn" id="infile" onchange="loadup(null)"></label>
           <div style="margin-top: 10px;">
-            <span id="plusminusbuttons">
-              <input title="Up a half step [SHIFT +]" class="btn-small plusminus" type="button" value="&#9833;+" id="plus" onclick="plus()">
-              <input title="Down a half step [SHIFT -]" class="btn-small plusminus" type="button" value="&#9833;-" id="minus" onclick="minus()">
+
+            <span id="plusminusbuttons" class="hidden">
+              <input class="btn-small plusminus" type="button" value="&#9833;+" id="plus" onclick="plus()">
+              <input class="btn-small plusminus" type="button" value="&#9833;-" id="minus" onclick="minus()">
               <input type="text" readonly id="offset" value="0" style="width: 2em;text-align:center">
             </span>
           </div>
-          <button title="Show help screen" class="btn-small" id="helptext" onclick="helpText()">Help</button>
-          <button title="Save the file for downloading" class="btn-small" id="outfile" onclick="saveFile()">Save</button>
-          <button title="Copy music text to clipboard" class="btn-small" id="copytext" onclick="selectText()">Copy to Clipboard</button>
+          <button class="btn-small" id="helptext" onclick="helpText()">Help</button>
+          <button class="btn-small hidden" id="outfile" onclick="saveFile()">Save</button>
+          <button class="btn-small hidden" id="copytext" onclick="selectText()">Copy to Clipboard</button>
           <div style="margin-top:10px;">
-            <button title="Clear form for new song" class="btn-small" id="cleartext" onclick="clearText()">Clear</button>
-            <button title="Show song only in new window" class="btn-small" id="present" onclick="presentText()">Present</button>
+            <button class="btn-small hidden" id="cleartext" onclick="clearText()">Clear</button>
+            <button class="btn-small hidden" id="present" onclick="presentText()">Present</button>
             
             <div title="Download song text file to your computer" id="downloadfile"></div>
 
@@ -65,6 +66,7 @@
             <div id="disclaimer" style="height:auto;border:1px solid #000;margin-top:30px;padding:8px">
             <strong>NOTE:</strong> This site does NOT retain any uploaded information.<br />
             All user data (music text) is removed after processing,<br />and is only displayed for the current user.
+
           </div>
 
         </div>
