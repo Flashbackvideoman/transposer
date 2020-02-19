@@ -43,8 +43,8 @@
           <label class="filebtn" for="infile">Source File: <input type="file" class="filebtn" id="infile" onchange="loadup(null)"></label>
           <div style="margin-top: 10px;">
             <span id="plusminusbuttons">
-              <input title="Up a half step [SHIFT +]" class="btn-small plusminus" type="button" value="+" id="plus" onclick="plus()">
-              <input title="Down a half step [SHIFT -]" class="btn-small plusminus" type="button" value="-" id="minus" onclick="minus()">
+              <input title="Up a half step [SHIFT +]" class="btn-small plusminus" type="button" value="&#9833;+" id="plus" onclick="plus()">
+              <input title="Down a half step [SHIFT -]" class="btn-small plusminus" type="button" value="&#9833;-" id="minus" onclick="minus()">
               <input type="text" readonly id="offset" value="0" style="width: 2em;text-align:center">
             </span>
           </div>
@@ -72,7 +72,7 @@
       
       <div class="col">
         <div style="margin-top: 40px;">
-          <div contenteditable="true" spellcheck="false" style="border: 1px solid #000;margin-left: 30px;min-height: 100px;min-width:550px;width: auto;padding: 10px;background-color: #fff; overflow-y:scroll" id="filetext" onpaste="handlepaste(event)">Paste song text here</div>
+          <div contenteditable="true" spellcheck="false" id="filetext" onpaste="handlepaste(event)">Paste song text here</div>
         </div>
       </div>  
       

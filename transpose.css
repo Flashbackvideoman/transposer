@@ -16,10 +16,21 @@
 }
 
 .plusminus {
-  width: 50px;
+  width: 80px;
   font-size: 30px;
 }
 
 .filebtn {
   font-size: 16px;
+}
+
+#filetext {
+  border: 1px solid #000;
+  margin-left: 30px;
+  min-height: 100px;
+  min-width:550px;
+  width: auto;
+  padding: 15px;
+  background-color: #fff; 
+  overflow-y:scroll;
 }
