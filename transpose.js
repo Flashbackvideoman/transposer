@@ -30,12 +30,12 @@ const saveToFile = 'transposed.txt';
         // Comma, not colon ----^
     });
 
-    /*$('#plusminusbuttons').hide();
+    $('#plusminusbuttons').hide();
     $('#outfile').hide();
     $('#copytext').hide();
     $('#cleartext').hide();
     $('#present').hide();
-    */
+    
     $(window).on("drop", function(ev) {
       ev.preventDefault();
       ev.stopImmediatePropagation();
